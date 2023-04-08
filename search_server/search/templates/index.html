@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <div class="ask485">
+    <title>ask485?</title>
+  </div>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<div class="feed">
+    <body>
+        <div class="search_bar">
+            <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
+            <form action="/" method="GET">
+            <div><input type="text" name="q" value="{{ request.args.get('q') }}"></div>
+            <div class="pagerank_weight">Pagerank Weight</div>
+            <div><input type="range" name="w" min="0" max="1" step=".01" value="{{ request.args.get('w') }}"></div>
+            <input type="submit" value="Search"/>
+            </form>
+        </div>
+        <div class="docs">
+            {% if num_docs == 0 %}
+                <div class="no_results">No search results found!</div>
+            {% else %}
+                {% for doc in docs %}
+                <div class="doc">
+                    <!-- if the document exists -->
+                    {% if doc.url %}
+                        <a class="doc_url" href="{{doc.url}}">{{doc.url}}</a>
+                    {% else %}
+                        <a class="doc_url">No url available</a>
+                    {% endif %}
+                    <div class="doc_title">{{doc.title}}</div>
+                    {% if doc.summary%}
+                        <div class="doc_summary">{{doc.summary}}</div>
+                    {% else %}
+                        <div class="doc_summary"> No summary available </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {%endif%}
+        </div>
+    </body>
+</div>
+</html>
