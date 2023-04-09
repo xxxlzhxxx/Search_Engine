@@ -106,4 +106,4 @@ def search_result(query, weight):
     """Search a query."""
     # build the query vector
     for term in query:
-        if 
+        pass 

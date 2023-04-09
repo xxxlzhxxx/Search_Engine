@@ -7,7 +7,7 @@ app = flask.Flask(__name__)  # pylint: disable=invalid-name
 
 
 # Read settings from config module (insta485/config.py)
-app.config.from_object('insta485.config')
+app.config.from_object('search.config')
 
 
 # Overlay settings read from a Python file whose path is set in the environment
@@ -16,7 +16,7 @@ app.config.from_object('insta485.config')
 #
 # EXAMPLE:
 # $ export INSTA485_SETTINGS=secret_key_config.py
-app.config.from_envvar('INSTA485_SETTINGS', silent=True)
+app.config.from_envvar('SEARCH_SETTINGS', silent=True)
 
 
 # Tell our app about views and model.  This is dangerously close to a

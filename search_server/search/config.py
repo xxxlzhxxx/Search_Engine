@@ -5,4 +5,4 @@ SEARCH_INDEX_SEGMENT_API_URLS = [
 ]
 
 # Database file is var/insta485.sqlite3
-DATABASE_FILENAME = 'var'/'search.sqlite3'
+DATABASE_FILENAME = 'var/search.sqlite3'
