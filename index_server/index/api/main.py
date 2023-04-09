@@ -81,7 +81,7 @@ def doc_ID_score():
     query = flask.request.args.get('q')
     weight = flask.request.args.get('w')
     query = query_clean(query)
-    hits = search_result(query)
+    hits = search_result(query, weight)
     context = {
         "hits": hits,
     }
@@ -102,5 +102,8 @@ def query_clean(query):
             result[term] = 1
     return result
 
-def search_result(query):
-    pass
+def search_result(query, weight):
+    """Search a query."""
+    # build the query vector
+    for term in query:
+        if 
