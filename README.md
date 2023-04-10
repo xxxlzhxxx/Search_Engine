@@ -2,9 +2,13 @@
 
 ## MapReduce Pipeline
 
----
 
 Stage 0 - Count Total Number of Documents:
+
+
+---
+
+Stage 1 - Count Total Number of Documents:
 
 Map:
 - Input: Preprocessed documents with doc_id, cleaned and tokenized text.
@@ -17,7 +21,7 @@ Reduce:
 
 ---
 
-Stage 1 - Term-document pairs and IDF calculation:
+Stage 2 - Term-document pairs and IDF calculation:
 
 Map:
 
@@ -34,7 +38,7 @@ Output: (term, IDF, list_of_doc_ids) tuples.
 
 ---
 
-Stage 2 - Term frequency and document normalization factor calculation:
+Stage 3 - Term frequency and document normalization factor calculation:
 
 Map:
 
