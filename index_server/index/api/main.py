@@ -78,8 +78,8 @@ def service_list():
 @index.app.route('/api/v1/hits/', methods=["GET"])
 def doc_ID_score():
     """Show hits."""
-    query = flask.request.args.get('q')
-    weight = flask.request.args.get('w')
+    query = flask.request.args.get("q", default="", type=str)
+    weight = flask.request.args.get("w", default=0.5, type=float)
     query = query_clean(query)
     hits = search_result(query, weight)
     context = {
@@ -93,7 +93,7 @@ def query_clean(query):
     query = re.sub(r"[^a-zA-Z0-9 ]+", "", query)
     query = query.casefold()
     query = query.split()
-    query = [word for word in query if word not in index.stopwords]
+    query = [word for word in query if word not in stopwords]
     result = {}
     for term in query:
         if term in result:
@@ -105,5 +105,47 @@ def query_clean(query):
 def search_result(query, weight):
     """Search a query."""
     # build the query vector
+    pterm = list(query.keys())[0]
+    doc_ids = set(inverted[pterm]["docs"].keys())
+    # Get all documents that contain all the terms in query
     for term in query:
-        pass 
+        if term not in inverted:
+            return []
+        doc_ids = doc_ids.intersection(
+            set(inverted[term]["docs"].keys())
+        )
+    
+    results = []
+    for doc_id in doc_ids:
+        query_vector = []
+        document_vector = []
+        norm_d_squared = 0
+        for term in query:
+            # Calculate query vector
+            term_frequency = query[term]
+            idf = inverted[term]["idf"]
+            query_vector.append(term_frequency * idf)
+            # Calculate document vector
+            term_frequency = int(
+                inverted[term]["docs"][doc_id]["tf"]
+            )
+            idf = inverted[term]["idf"]
+            document_vector.append(term_frequency * idf)
+            # Calculate norm_d_squared
+            norm_d_squared = (
+                inverted[term]["docs"][doc_id]["norm_factor"]
+            )
+            
+        # Calculate cosine similarity
+        tfidf = sum([x * y for x, y in zip(query_vector, document_vector)]) / \
+            (math.sqrt(sum([x * x for x in query_vector])) *
+                math.sqrt(float(norm_d_squared)))
+        pr = pagerank[doc_id]
+        weighted_score = weight * pr + (1 - weight) * tfidf
+        results.append({
+            "docid": int(doc_id),
+            "score": weighted_score,
+        })
+    # Sort by score
+    results.sort(key=lambda x: x["score"], reverse=True)
+    return results
