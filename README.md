@@ -5,23 +5,9 @@
 
 Stage 0 - Count Total Number of Documents:
 
-
 ---
 
-Stage 1 - Count Total Number of Documents:
-
-Map:
-- Input: Preprocessed documents with doc_id, cleaned and tokenized text.
-- Emit (1) for each document.
-- Output: (1) 
-
-Reduce:
-- Input: (1) pairs grouped by 1.
-- Output: Total number of documents (N).
-
----
-
-Stage 2 - Term-document pairs and IDF calculation:
+Stage 1 - Term-document pairs and TF/IDF calculation:
 
 Map:
 
@@ -33,23 +19,23 @@ Reduce:
 
 - Input: (term, doc_id) pairs grouped by term.
 - Create a list of unique doc_ids for each term.
+- Calculate the document frequency (df) for each term.
 - Calculate the inverse document frequency (IDF) for each term using the formula: IDF = log(N / df), where N is the total number of documents and df is the number of documents containing the term.
-Output: (term, IDF, list_of_doc_ids) tuples.
+Output: (term, IDF, list[doc_id], list[TF]) tuples.
 
 ---
 
-Stage 3 - Term frequency and document normalization factor calculation:
+Stage 2 - Document normalization factor calculation:
 
 Map:
 
-- Input: (term, IDF, list_of_doc_ids) tuples from stage 1.
-- Emit a key-value pair (doc_id, (term, IDF)) for each doc_id in the list_of_doc_ids.
-- Output: (doc_id, (term, IDF)) pairs.
+- Input: (term, IDF, list[doc_id] list[TF]) tuples.
+- Emit a key-value pair (doc_id, (term, IDF, TF)) for each doc_id in the list_of_doc_ids.
+- Output: (doc_id, (term, IDF, TF)) pairs.
 
 Reduce:
 
 - Input: (doc_id, (term, IDF)) pairs grouped by doc_id.
-- Calculate the term frequency (TF) for each term in the document.
 - Calculate the document normalization factor.
 - Output: (doc_id, term, IDF, TF, normalization_factor) tuples.
 
