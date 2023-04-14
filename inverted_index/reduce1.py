@@ -21,13 +21,13 @@ def reduce_one_group(key, group):
         doc_with_term[doc_id] += 1
     doc_tf_list = []
     doc_id_list = []
-    for doc_id, tf in doc_with_term.items():
-        doc_tf_list.append(tf)
+    for doc_id, freq in doc_with_term.items():
+        doc_tf_list.append(freq)
         doc_id_list.append(doc_id)
-    with open("total_document_count.txt") as f:
-        N = int(f.read())
-    df = len(doc_with_term)
-    print(f"{key}\t{log(N/df)}\t{doc_id_list}\t{doc_tf_list}")
+    with open("total_document_count.txt", encoding="utf8") as file:
+        count = int(file.read())
+    all_count = len(doc_with_term)
+    print(f"{key}\t{log( count/all_count)}\t{doc_id_list}\t{doc_tf_list}")
 
 
 def keyfunc(line):
