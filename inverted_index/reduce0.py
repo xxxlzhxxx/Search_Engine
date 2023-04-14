@@ -10,7 +10,10 @@ import itertools
 
 def reduce_one_group(key, group):
     """Reduce one group."""
-    assert False, "IMPLEMENT ME"
+    ctr = 0
+    for _ in group:
+        ctr += 1
+    print(ctr)
 
 
 def keyfunc(line):
