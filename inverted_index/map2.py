@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Map 2."""
 import sys
-from utils import clean_query
 
 def main():
     # Input comes from standard input

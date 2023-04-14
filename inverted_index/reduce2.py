@@ -6,7 +6,6 @@ https://github.com/eecs485staff/madoop/blob/main/README_Hadoop_Streaming.md
 """
 import sys
 import itertools
-from collections import defaultdict
 
 
 def reduce_one_group(key, group):

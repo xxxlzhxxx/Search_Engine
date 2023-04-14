@@ -16,7 +16,7 @@ def reduce_one_group(key, group):
     doc_with_term = defaultdict(int)
     for content in group:
         # remove \n
-        content = content[:-1]
+        content = content.strip()
         doc_id = int(content.split("\t")[1])
         doc_with_term[doc_id] += 1
     doc_tf_list = []
@@ -24,7 +24,7 @@ def reduce_one_group(key, group):
     for doc_id, tf in doc_with_term.items():
         doc_tf_list.append(tf)
         doc_id_list.append(doc_id)
-    with open("output0/part-00000") as f:
+    with open("total_document_count.txt") as f:
         N = int(f.read())
     df = len(doc_with_term)
     print(f"{key}\t{log(N/df)}\t{doc_id_list}\t{doc_tf_list}")

@@ -24,10 +24,10 @@ def reduce_one_group(key, group):
     for term in term_orders:
         term_data = per_term_data[term]
         doc_orders = sorted(term_data.keys())
-        print(f"{term}\t{per_term_idf[term]}", end="")
+        print(f"{term} {per_term_idf[term]}", end="")
         for doc_id in doc_orders:
             tf, norm_fact = term_data[doc_id]
-            print(f"\t{doc_id}\t{tf}\t{norm_fact}", end="")
+            print(f" {doc_id} {tf} {norm_fact}", end="")
         print()
 
 
