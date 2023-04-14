@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Map 0."""
 import sys
-import csv
+
 
 def main():
+    """Map 0.""" ""
     # Input comes from standard input
-    for line in sys.stdin:
+    for _ in sys.stdin:
         print("f {1} {}")
+
 
 if __name__ == "__main__":
     main()

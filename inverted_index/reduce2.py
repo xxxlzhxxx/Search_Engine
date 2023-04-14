@@ -8,7 +8,7 @@ import sys
 import itertools
 
 
-def reduce_one_group(key, group):
+def reduce_one_group(group):
     """Reduce one group."""
     #  (term, doc_id)
     norm_factor_squared = 0
@@ -16,11 +16,11 @@ def reduce_one_group(key, group):
     for content in group:
         # remove \n
         content = content[:-1]
-        doc_id, term, IDF, TF = content.split("\t")
-        term_data.append((doc_id, term, IDF, TF))
-        norm_factor_squared += (float(TF) * float(IDF)) ** 2
-    for doc_id, term, IDF, TF in term_data:
-        print(f"{doc_id}\t{term}\t{IDF}\t{TF}\t{norm_factor_squared}")
+        doc_id, term, idf, freq = content.split("\t")
+        term_data.append((doc_id, term, idf, freq))
+        norm_factor_squared += (float(freq) * float(idf)) ** 2
+    for doc_id, term, idf, freq in term_data:
+        print(f"{doc_id}\t{term}\t{idf}\t{freq}\t{norm_factor_squared}")
 
 
 def keyfunc(line):
@@ -30,8 +30,8 @@ def keyfunc(line):
 
 def main():
     """Divide sorted lines into groups that share a key."""
-    for key, group in itertools.groupby(sys.stdin, keyfunc):
-        reduce_one_group(key, group)
+    for _, group in itertools.groupby(sys.stdin, keyfunc):
+        reduce_one_group(group)
 
 
 if __name__ == "__main__":
