@@ -13,18 +13,17 @@
         <div class="search_bar">
             <!-- DO NOT CHANGE THIS (aside from where we say 'FIXME') -->
             <form action="/" method="GET">
-                {% if request.args.get('q') %}
+                {% if request.args.get('q') == None %}
+                    <div><input type="text" name="q" /></div>
+                {% else %}
                     <div><input type="text" name="q" value="{{ request.args.get('q') }}" /></div>
-                {% else %}
-                    <div><input type="text" name="q" placeholder="Search" /></div>
                 {% endif %}
-                <div class="pagerank_weight">Pagerank Weight</div>
-                {% if request.args.get('w') %}
+                {% if request.args.get('w') == None %}
+                    <div><input type="range" name="w" min="0" max="1" step=".01" /></div>
+                {% else %}
                     <div><input type="range" name="w" min="0" max="1" step=".01" value="{{ request.args.get('w') }}" /></div>
-                {% else %}
-                    <div><input type="range" name="w" min="0" max="1" step=".01" value="None" /></div>
                 {% endif %}
-                <input type="submit" value="Search" />
+                <input type="submit" value="Search"/>
             </form>
         </div>
         <div class="docs">

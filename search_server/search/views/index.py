@@ -36,9 +36,9 @@ def show_index():
         thread.join()
     docs = []
     for result in results:
-        for doc in result["hits"]:
-            docs.append(doc)
-    print(docs)
+        if len(result) != 0:
+            for doc in result["hits"]:
+                docs.append(doc)
     docs.sort(key=lambda x: x["score"], reverse=True)
     if len(docs) > 10:
         docs = docs[:10]
