@@ -1,0 +1,121 @@
+ * Serving Flask app 'search'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://172.20.192.200:8000
+[33mPress CTRL+C to quit[0m
+[2023-04-13 13:25:52,910] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/xtt/eecs_485/Search_Engine/search_server/search/views/index.py", line 41, in show_index
+    for doc in result["hits"]:
+TypeError: list indices must be integers or slices, not str
+127.0.0.1 - - [13/Apr/2023 13:25:52] "[35m[1mGET /?q=asdkj&w=0.5 HTTP/1.1[0m" 500 -
+127.0.0.1 - - [13/Apr/2023 13:25:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2023 13:25:56] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+[2023-04-13 13:25:59,943] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/xtt/eecs_485/Search_Engine/search_server/search/views/index.py", line 41, in show_index
+    for doc in result["hits"]:
+TypeError: list indices must be integers or slices, not str
+127.0.0.1 - - [13/Apr/2023 13:25:59] "[35m[1mGET /?q=asd&w=0.5 HTTP/1.1[0m" 500 -
+[2023-04-13 13:26:51,095] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/xtt/eecs_485/Search_Engine/search_server/search/views/index.py", line 41, in show_index
+    for doc in result["hits"]:
+TypeError: list indices must be integers or slices, not str
+127.0.0.1 - - [13/Apr/2023 13:26:51] "[35m[1mGET /?q=university&w=0.5 HTTP/1.1[0m" 500 -
+[2023-04-13 13:29:36,210] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/xtt/eecs_485/Search_Engine/search_server/search/views/index.py", line 41, in show_index
+    for doc in result["hits"]:
+TypeError: list indices must be integers or slices, not str
+127.0.0.1 - - [13/Apr/2023 13:29:36] "[35m[1mGET /?q=michigan&w=0.5 HTTP/1.1[0m" 500 -
+[2023-04-13 13:31:01,556] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/xtt/eecs_485/Search_Engine/search_server/search/views/index.py", line 41, in show_index
+    for doc in result["hits"]:
+TypeError: list indices must be integers or slices, not str
+127.0.0.1 - - [13/Apr/2023 13:31:01] "[35m[1mGET /?q=michigan&w=0.5 HTTP/1.1[0m" 500 -
+[2023-04-13 13:31:24,610] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/xtt/eecs_485/Search_Engine/search_server/search/views/index.py", line 41, in show_index
+    for doc in result["hits"]:
+TypeError: list indices must be integers or slices, not str
+127.0.0.1 - - [13/Apr/2023 13:31:24] "[35m[1mGET /?q=michigan&w=0.5 HTTP/1.1[0m" 500 -
+[2023-04-13 13:32:59,111] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/xtt/eecs_485/Search_Engine/search_server/search/views/index.py", line 41, in show_index
+    for doc in result["hits"]:
+TypeError: list indices must be integers or slices, not str
+127.0.0.1 - - [13/Apr/2023 13:32:59] "[35m[1mGET /?q=michigan&w=0.5 HTTP/1.1[0m" 500 -
+[2023-04-13 13:35:19,522] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/xtt/eecs_485/Search_Engine/env/lib/python3.8/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/xtt/eecs_485/Search_Engine/search_server/search/views/index.py", line 41, in show_index
+    for doc in result["hits"]:
+TypeError: list indices must be integers or slices, not str
+127.0.0.1 - - [13/Apr/2023 13:35:19] "[35m[1mGET /?q=michigan&w=0.5 HTTP/1.1[0m" 500 -
