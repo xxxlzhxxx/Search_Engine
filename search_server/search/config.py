@@ -1,3 +1,4 @@
+"""Configuration for the search server."""
 SEARCH_INDEX_SEGMENT_API_URLS = [
     "http://localhost:9000/api/v1/hits/",
     "http://localhost:9001/api/v1/hits/",

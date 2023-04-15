@@ -56,7 +56,8 @@ def read_pagerank():
 
 def read_stopwords():
     """Read stopwords."""
-    with open("index_server/index/stopwords.txt", 'r', encoding="utf-8") as file:
+    file_path = Path("index_server/index/stopwords.txt")
+    with open(file_path, 'r', encoding="utf-8") as file:
         for line in file:
             stopwords.add(line.strip())
 
@@ -98,16 +99,18 @@ def query_clean(query):
             result[term] = 1
     return result
 
+
 def square_generator(vector):
-    "Func gen."
+    """Func gen."""
     for vec in vector:
         yield vec*vec
 
 
 def dot_product_generator(vector1, vector2):
-    "Func generator."
+    """Func generator."""
     for vec1, vec2 in zip(vector1, vector2):
         yield vec1 * vec2
+
 
 def search_result(query, weight):
     """Search a query."""

@@ -1,10 +1,12 @@
+"""Index view."""
 from threading import Thread
 import flask
 import search
 import requests
 
+
 def my_function(url, query, weight, results, idx):
-    """Searches a URL with a given query and weight."""
+    """Search a URL with a given query and weight."""
     full_url = f"{url}?q={query}&w={weight}"
     try:
         response = requests.get(full_url, timeout=5)
@@ -27,9 +29,11 @@ def show_index():
     if query is None:
         return flask.render_template("index.html", **context)
     threads = []
-    results = [[] for _ in range(len(search.app.config["SEARCH_INDEX_SEGMENT_API_URLS"]))]
-    for index, url in enumerate(search.app.config["SEARCH_INDEX_SEGMENT_API_URLS"]):
-        thread = Thread(target=my_function, args=(url, query, weight, results, index))
+    config = search.app.config["SEARCH_INDEX_SEGMENT_API_URLS"]
+    results = [[] for _ in range(len(config))]
+    for index, url in enumerate(config):
+        thread = Thread(target=my_function,
+                        args=(url, query, weight, results, index))
         thread.start()
         threads.append(thread)
     for thread in threads:
@@ -45,10 +49,12 @@ def show_index():
     doc_info = []
     for doc in docs:
         cur = connection.execute(
-            "SELECT title, summary, url FROM Documents WHERE docid = ?", (doc["docid"],)
+            "SELECT title, summary, url "
+            "FROM Documents WHERE docid = ?",
+            (doc["docid"],)
         )
         doc_info.append(cur.fetchone())
     context["docs"] = doc_info
     context["num_docs"] = len(doc_info)
-    
+
     return flask.render_template("index.html", **context)
