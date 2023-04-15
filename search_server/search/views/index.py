@@ -27,7 +27,7 @@ def show_index():
     if query is None:
         return flask.render_template("index.html", **context)
     threads = []
-    results = [None] * len(search.app.config["SEARCH_INDEX_SEGMENT_API_URLS"])
+    results = [[] for _ in range(len(search.app.config["SEARCH_INDEX_SEGMENT_API_URLS"]))]
     for index, url in enumerate(search.app.config["SEARCH_INDEX_SEGMENT_API_URLS"]):
         thread = Thread(target=my_function, args=(url, query, weight, results, index))
         thread.start()
@@ -38,8 +38,10 @@ def show_index():
     for result in results:
         for doc in result["hits"]:
             docs.append(doc)
-    
-    docs.sort(key=lambda x: x["score"], reverse=True)[:10]
+    print(docs)
+    docs.sort(key=lambda x: x["score"], reverse=True)
+    if len(docs) > 10:
+        docs = docs[:10]
     doc_info = []
     for doc in docs:
         cur = connection.execute(
