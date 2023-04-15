@@ -1,22 +1,19 @@
 """index api."""
 import math
-import pathlib
 import re
-import flask
-import index
-import os
 from pathlib import Path
+import os
+import index
+import flask
+
+
+pagerank = {}
+inverted = {}
+stopwords = set()
 
 
 def init():
     """Load the relavent files into memory."""
-    index_dir = pathlib.Path(__file__).parent.parent
-    global pagerank
-    pagerank = {}
-    global stopwords
-    stopwords = set()
-    global inverted
-    inverted = {}
     read_inverted()
     read_pagerank()
     read_stopwords()
@@ -28,14 +25,14 @@ def read_inverted():
         "INDEX_PATH", "inverted_index_1.txt"
     )
     path_dir = "index_server/index/inverted_index"
-    with open(Path(path_dir) / Path(index.app.config['INDEX_PATH']), 
-              'r', 
+    with open(Path(path_dir) / Path(index.app.config['INDEX_PATH']),
+              'r',
               encoding='UTF-8') as file:
         for line in file:
             line = line.split()
             term = line[0]
             idf = line[1]
-            num_docs = (len(line)-2)// 3
+            num_docs = (len(line)-2) // 3
             inverted[term] = {}
             inverted[term]['idf'] = float(idf)
             inverted[term]['docs'] = {}
@@ -49,10 +46,9 @@ def read_inverted():
                 }
 
 
-
 def read_pagerank():
     """Read pagerank."""
-    with open('index_server/index/pagerank.out') as file:
+    with open('index_server/index/pagerank.out', encoding="utf-8") as file:
         for line in file:
             doc_id, rank = line.strip().split(',')
             pagerank[doc_id] = float(rank)
@@ -76,7 +72,7 @@ def service_list():
 
 
 @index.app.route('/api/v1/hits/', methods=["GET"])
-def doc_ID_score():
+def doc_score():
     """Show hits."""
     query = flask.request.args.get("q", default="", type=str)
     weight = flask.request.args.get("w", default=0.5, type=float)
@@ -102,6 +98,17 @@ def query_clean(query):
             result[term] = 1
     return result
 
+def square_generator(vector):
+    "Func gen."
+    for vec in vector:
+        yield vec*vec
+
+
+def dot_product_generator(vector1, vector2):
+    "Func generator."
+    for vec1, vec2 in zip(vector1, vector2):
+        yield vec1 * vec2
+
 def search_result(query, weight):
     """Search a query."""
     # build the query vector
@@ -114,7 +121,7 @@ def search_result(query, weight):
         doc_ids = doc_ids.intersection(
             set(inverted[term]["docs"].keys())
         )
-    
+
     results = []
     for doc_id in doc_ids:
         query_vector = []
@@ -135,13 +142,13 @@ def search_result(query, weight):
             norm_d_squared = (
                 inverted[term]["docs"][doc_id]["norm_factor"]
             )
-            
+
         # Calculate cosine similarity
-        tfidf = sum([x * y for x, y in zip(query_vector, document_vector)]) / \
-            (math.sqrt(sum([x * x for x in query_vector])) *
+        tfidf = sum(dot_product_generator(query_vector, document_vector)) / \
+            (math.sqrt(sum(square_generator(query_vector))) *
                 math.sqrt(float(norm_d_squared)))
-        pr = pagerank[doc_id]
-        weighted_score = weight * pr + (1 - weight) * tfidf
+        page_rankk = pagerank[doc_id]
+        weighted_score = weight * page_rankk + (1 - weight) * tfidf
         results.append({
             "docid": int(doc_id),
             "score": weighted_score,
